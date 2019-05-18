@@ -1,7 +1,10 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 Vagrant.configure('2') do |config|
-  config.vm.box      = 'ubuntu/disco64' # 19.04
+   # Download file vagrant box before vagrant up to save time
+   # https://cloud-images.ubuntu.com/releases/19.04/release/ubuntu-19.04-server-cloudimg-amd64-vagrant.box
+   # Using vagrant box add ubuntu1904 /path_file_box
+  config.vm.box      = 'ubuntu1804'
   config.vm.hostname = 'rails-pc'
 
   config.vm.network :forwarded_port, guest: 3000, host: 3000
@@ -11,7 +14,7 @@ Vagrant.configure('2') do |config|
   config.vm.provision :shell, path: 'bootstrap.sh', keep_color: true
 
   config.vm.provider 'virtualbox' do |v|
-    v.memory = ENV.fetch('RAILS_DEV_BOX_RAM', 2048).to_i
-    v.cpus   = ENV.fetch('RAILS_DEV_BOX_CPUS', 2).to_i
+    v.memory = 2048
+    v.cpus   = 2
   end
 end
